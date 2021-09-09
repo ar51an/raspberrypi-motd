@@ -7,7 +7,7 @@ Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 ![WithoutCount](https://user-images.githubusercontent.com/11185794/132077322-32c33c50-1a81-4d26-9be1-15c5284c161a.png)
 #
 ### Intro
-Many folks use Raspberry Pi as headless (without display) system. If you use SSH to connect to your Raspberry Pi more often and interested in changing the MOTD (message of the day), this might be the one you were looking for. There are many options available for customized motd on the web with and without ascii art. **The goal was to create a simple, attractive, swift and useful motd**.
+Many folks use Raspberry Pi as headless (without display) system. If you use SSH to connect to your Raspberry Pi more often and interested in changing the MOTD (message of the day), this might be the one you were looking for. There are many options available for customized motd on the web with and without ascii art. **The goal was to create simple, attractive, swift and useful motd**.
 <br/>
 
 I prefer updating my OS manually. After the transition from Ubuntu to Raspberry Pi OS, lack of number of available updates on motd was the triggering point to develop this motd. Few custom motd on the web for Raspberry Pi OS shows the number of available updates. They used `apt-check` utility which was part of update-notifier-common package. It is no longer available in the RaspiOS buster. They merged the features of update-notifier-common package into unattended-upgrades add-on package. Ubuntu uses the same utility to show package count on motd. I used `apt-get` to parse the required information.

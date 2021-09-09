@@ -1,0 +1,40 @@
+#!/bin/bash
+
+#clear
+
+function color (){
+  echo "\e[$1m$2\e[0m"
+}
+
+function findDeviceModel (){
+  deviceName=""
+  local deviceModel=$(tr -d '\0' < /sys/firmware/devicetree/base/model)
+  local hostName=$(hostname)
+
+  if [ $hostName ]; then
+    deviceName="$deviceModel - $hostName"
+  else
+    deviceName="$deviceModel"
+  fi
+}
+
+deviceColor="30;48;5;249"
+greetingsColor="30;38;5;103"
+userColor="30;48;5;67"
+me=$(logname)
+findDeviceModel
+
+# Device Info
+deviceLabel=" $(color $deviceColor " $deviceName ")"
+
+# Greetings
+me="$(color $userColor " $me ")"
+greetings="$(color $greetingsColor " ⮞ Welcome »") $me\n"
+greetings="$greetings$(color $greetingsColor " ⮞ $(date +"%a %b %d %Y, %I:%M:%S %p")")\n"
+
+# OS
+greetings="$greetings$(color $greetingsColor " ⮞ $(uname -srm)")"
+
+# Print
+echo -e "\n$deviceLabel"
+echo -e "\n$greetings"

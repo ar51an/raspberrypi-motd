@@ -59,13 +59,13 @@ label3="$(color $statsLabelColor "Uptime") $(color $bulletColor "··")$(color $
 label4="$(awk '{print $1}' /proc/loadavg)"
 label4="$(color $statsLabelColor "Load") $(color $bulletColor "···")$(color $statsLabelColor "›") $(color $infoColor $label4)"
 
-label5="$(df -h ~ | awk 'NR==2 { printf "%sB / %sB \e[30;38;5;144m» Free: %sB\e[0m",$3,$2,$4; }')"
+label5="$(df -h ~ | awk 'NR==2 { printf "%sB / %sB \\e[30;38;5;144m» Free: %sB\\e[0m",$3,$2,$4; }')"
 label5="$(color $statsLabelColor "Disk") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor "$label5")"
 
 label6="$(/bin/ls -d /proc/[0-9]* | wc -l)"
 label6="$(color $statsLabelColor "Procs") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor $label6)"
 
-label7="$(free -h --si | awk 'NR==2 { printf "%sB / %sB \e[30;38;5;144m» Free: %sB\e[0m",$3,$2,$4; }')"
+label7="$(free -h --si | awk 'NR==2 { printf "%sB / %sB \\e[30;38;5;144m» Free: %sB\\e[0m",$3,$2,$4; }')"
 label7="$(color $statsLabelColor "Memory") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor "$label7")"
 
 label8="$(hostname -I)"

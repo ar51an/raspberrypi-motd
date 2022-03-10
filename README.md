@@ -2,9 +2,9 @@
 Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 
 ### Preview  
-![WithCount](https://user-images.githubusercontent.com/11185794/132077317-0513309b-2968-46f1-954f-4e225bfa49a6.png)
+![WithCount](https://user-images.githubusercontent.com/11185794/157579568-50dddaa2-c56d-4eb7-bc7c-a8a0a9cd0b3d.png)
 
-![WithoutCount](https://user-images.githubusercontent.com/11185794/132077322-32c33c50-1a81-4d26-9be1-15c5284c161a.png)
+![WithoutCount](https://user-images.githubusercontent.com/11185794/157579619-535aecd7-be3f-477a-9a7e-dccd70f0fb56.png)
 #
 ### Intro
 Many folks use Raspberry Pi as headless (without display) system. If you use SSH to connect to your Raspberry Pi more often and interested in changing the MOTD (message of the day), this might be the one you were looking for. There are many options available for customized motd on the web with and without ascii art. **The goal was to create simple, attractive, swift and useful motd**.
@@ -17,7 +17,7 @@ The process I used for the motd is the same as Raspberry Pi OS OR Ubuntu uses to
 <br/>
 
 #### Specs:
-> Raspberry Pi 4 Model B &nbsp;•&nbsp; 2GB Memory &nbsp;•&nbsp; raspios-buster-arm64-lite  
+> Raspberry Pi 4 Model B &nbsp;•&nbsp; 2GB Memory &nbsp;•&nbsp; raspios-bullseye-arm64-lite  
 > System & Distro I used for build & test. It should work on other specs as well.  
 #
 ### Steps

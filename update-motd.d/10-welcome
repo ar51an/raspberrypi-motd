@@ -21,6 +21,7 @@ function findDeviceModel (){
 deviceColor="30;48;5;249"
 greetingsColor="30;38;5;103"
 userColor="30;48;5;67"
+codenameColor="30;38;5;108"
 me=$(logname)
 findDeviceModel
 
@@ -29,7 +30,8 @@ deviceLabel=" $(color $deviceColor " $deviceName ")"
 
 # Greetings
 me="$(color $userColor " $me ")"
-greetings="$(color $greetingsColor " ⮞ Welcome »") $me\n"
+codename="$(grep 'VERSION_CODENAME' /etc/os-release | cut -d '=' -f 2)"
+greetings="$(color $greetingsColor " ⮞ Welcome »") $me $(color $greetingsColor To) $(color $codenameColor $codename)\n"
 greetings="$greetings$(color $greetingsColor " ⮞ $(date +"%a %b %d %Y, %I:%M:%S %p")")\n"
 
 # OS

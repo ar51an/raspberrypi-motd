@@ -11,7 +11,7 @@ Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 
 ![motd](https://img.shields.io/badge/-motd-D8BFD8?logo=themodelsresource&logoColor=3a3a3d)
 &nbsp;&nbsp;![visitors](https://shields-io-visitor-counter.herokuapp.com/badge?page=ar51an.raspberrypi-motd&label=visitors&logo=github&color=4883c2)
-&nbsp;&nbsp;![lang](https://img.shields.io/badge/lang-Bash-5F9EA0?logo=gnubash&logoColor=#4EAA25)
+&nbsp;&nbsp;![lang](https://img.shields.io/badge/lang-Bash-5F9EA0?logo=gnubash&logoColor=4EAA25)
 &nbsp;&nbsp;![license](https://img.shields.io/badge/license-MIT-CED8E1)
 </div>
 

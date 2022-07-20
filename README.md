@@ -1,24 +1,33 @@
 ## MOTD
 Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 
-### Preview  
+### Preview
+<div align="center">
+
 ![WithCount](https://user-images.githubusercontent.com/11185794/157579568-50dddaa2-c56d-4eb7-bc7c-a8a0a9cd0b3d.png)
 
 ![WithoutCount](https://user-images.githubusercontent.com/11185794/157579619-535aecd7-be3f-477a-9a7e-dccd70f0fb56.png)
-#
+<br>
+
+![motd](https://img.shields.io/badge/-motd-D8BFD8?logo=themodelsresource&logoColor=3a3a3d)
+&nbsp;&nbsp;![visitors](https://shields-io-visitor-counter.herokuapp.com/badge?page=ar51an.raspberrypi-motd&label=visitors&logo=github&color=4883c2)
+&nbsp;&nbsp;![lang](https://img.shields.io/badge/lang-Bash-5F9EA0?logo=gnubash&logoColor=#4EAA25)
+&nbsp;&nbsp;![license](https://img.shields.io/badge/license-MIT-CED8E1)
+</div>
+
 ### Intro
 Many folks use Raspberry Pi as headless (without display) system. If you use SSH to connect to your Raspberry Pi more often and interested in changing the MOTD (message of the day), this might be the one you were looking for. There are many options available for customized motd on the web with and without ascii art. **The goal was to create simple, attractive, swift and useful motd**.
 <br/>
 
-I prefer updating my OS manually. After the transition from Ubuntu to Raspberry Pi OS, lack of number of available updates on motd was the triggering point to develop this motd. Few custom motd on the web for Raspberry Pi OS shows the number of available updates. They used `apt-check` utility which was part of update-notifier-common package. It is no longer available in the RaspiOS buster. They merged the features of update-notifier-common package into unattended-upgrades add-on package. Ubuntu uses the same utility to show package count on motd. I used `apt-get` to parse the required information.
+I prefer updating my OS manually. After the transition from Ubuntu to Raspberry Pi OS, lack of number of available updates on motd was the triggering point to develop this motd. Few custom motd on the web for Raspberry Pi OS shows the number of available updates. They used `apt-check` utility which was part of update-notifier-common package. It is no longer available from RaspiOS buster onward. They merged the features of update-notifier-common package into unattended-upgrades add-on package. Ubuntu uses the same utility to show package count on motd. I used `apt-get` to parse the required information.
 <br/>
 
 The process I used for the motd is the same as Raspberry Pi OS OR Ubuntu uses to show the motd dynamically. There is no third party package or tool used. It is written in bash and executes using the same mechanism as the default motd. There are multiple commands for retrieving the same information. I tested various commands for each info and used the ones that took least amount of time. This dynamic motd takes approximately 1 sec or less after entering password. This is the fastest you can get with all the information it is displaying.
 <br/>
 
 #### Specs:
-> Raspberry Pi 4 Model B &nbsp;•&nbsp; 2GB Memory &nbsp;•&nbsp; raspios-bullseye-arm64-lite  
-> System & Distro I used for build & test. It should work on other specs as well.  
+> Raspberry Pi 4 Model B &nbsp;•&nbsp; raspios-bullseye-arm64-lite  
+> System & Distro used for motd. It should work on other specs as well.  
 #
 ### Steps
 #### ⮞ Remove Default MOTD

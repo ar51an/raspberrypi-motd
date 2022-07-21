@@ -1,13 +1,6 @@
 ## MOTD
 Customized dynamic Message of the Day (MOTD) for Raspberry Pi
-
-### Preview
 <div align="center">
-
-![WithCount](https://user-images.githubusercontent.com/11185794/157579568-50dddaa2-c56d-4eb7-bc7c-a8a0a9cd0b3d.png)
-
-![WithoutCount](https://user-images.githubusercontent.com/11185794/157579619-535aecd7-be3f-477a-9a7e-dccd70f0fb56.png)
-<br>
 
 ![motd](https://img.shields.io/badge/-motd-D8BFD8?logo=themodelsresource&logoColor=3a3a3d)
 &nbsp;&nbsp;![visitors](https://shields-io-visitor-counter.herokuapp.com/badge?page=ar51an.raspberrypi-motd&label=visitors&logo=github&color=4883c2)
@@ -15,6 +8,15 @@ Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 &nbsp;&nbsp;![license](https://img.shields.io/badge/license-MIT-CED8E1)
 </div>
 
+### Preview
+<div align="center">
+
+![WithCount](https://user-images.githubusercontent.com/11185794/157579568-50dddaa2-c56d-4eb7-bc7c-a8a0a9cd0b3d.png)
+
+![WithoutCount](https://user-images.githubusercontent.com/11185794/157579619-535aecd7-be3f-477a-9a7e-dccd70f0fb56.png)
+</div>
+
+---
 ### Intro
 Many folks use Raspberry Pi as headless (without display) system. If you use SSH to connect to your Raspberry Pi more often and interested in changing the MOTD (message of the day), this might be the one you were looking for. There are many options available for customized motd on the web with and without ascii art. **The goal was to create simple, attractive, swift and useful motd**.
 <br/>
@@ -114,15 +116,31 @@ The process I used for the motd is the same as Raspberry Pi OS OR Ubuntu uses to
 
 #### ⮞ Automation
 
-* We are almost done. We need to automate the process of finding pending OS updates count. I did it through a cronjob which runs once a day. You can change the time and frequency based on your requirements, once a day serves my purpose very well. Below cronjob will find the count of pending OS updates once a day at 8:00pm and update it in the motd.
-  > **Create cronjob:**  
-  > Open crontab for root `sudo crontab -e`  
-  > Add below 2 lines at the end of the crontab file, **save** & close the editor  
-  > ```
-  > # MOTD - Update '20-update' file - Once A Day At 8:00PM
-  > 0 20 * * * run-parts /etc/update-motd-static.d
-  > ```
-  
+* We are almost done. We need to automate the process of finding pending OS updates count. There are 2 options **either** systemd timer (recommended) **or** cronjob. They are scheduled to run once a day at 8:00pm for pending OS updates count. You can change the time and frequency based on your requirements, once a day serves my purpose very well.
+
+  * **Systemd Timer**  
+	  Copy `motd-update.timer` & `motd-update.service` files from this repo folder `systemd-timer` to `/etc/systemd/system`. Make sure files are under root ownership. Enable and start timer.  
+    > **Change files ownership [If needed]:**  
+    > `sudo chown root:root /etc/systemd/system/motd-update.timer`  
+    > `sudo chown root:root /etc/systemd/system/motd-update.service`  
+    > **Enable timer:**  
+    > `sudo systemctl enable motd-update.timer`  
+    > **Start timer:**  
+    > `sudo systemctl start motd-update.timer`  
+    > **List all timers [If needed]:**  
+    > `systemctl list-timers`  
+
+  * **Cronjob**  
+	  Open crontab for root and add cronjob to it.  
+    > **Open crontab:**  
+    > `sudo crontab -e`  
+    > **Add cronjob:**  
+    > Add below 2 lines at the end of the crontab file, **save** & close the editor  
+    > ```
+    > # MOTD - Update '20-update' file - Once A Day At 8:00PM
+    > 0 20 * * * run-parts /etc/update-motd-static.d
+    > ```
+
 #
 > **_NOTE:_**  
 > If this is the first time you are creating a cronjob. It will ask for your preferred editor, I use nano, you can choose your preferred one.  

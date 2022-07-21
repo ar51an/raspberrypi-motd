@@ -1,0 +1,9 @@
+[Unit]
+Description=Motd upgradable package count timer - Daily at 8:00PM
+
+[Timer]
+OnCalendar=*-*-* 20:00
+Persistent=true
+ 
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Motd upgradable package count service
+After=network.target
+
+[Service]
+ExecStart=run-parts /etc/update-motd-static.d

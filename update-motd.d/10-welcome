@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#clear
-
 function color (){
   echo "\e[$1m$2\e[0m"
 }
@@ -18,10 +16,10 @@ function findDeviceModel (){
   fi
 }
 
-deviceColor="30;48;5;249"
-greetingsColor="30;38;5;103"
-userColor="30;48;5;67"
-codenameColor="30;38;5;108"
+deviceColor="38;5;16;48;5;249"
+greetingsColor="38;5;103"
+userColor="38;5;16;48;5;67"
+codenameColor="38;5;108"
 me=$(logname)
 findDeviceModel
 

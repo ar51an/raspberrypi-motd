@@ -56,8 +56,8 @@ uptime="$uptime $(color $dimInfoColor "» $(date -d "@"$(grep btime /proc/stat |
 label3="$uptime"
 label3="$(color $statsLabelColor "Uptime") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor "$label3")"
 
-label4="$(awk '{print $1}' /proc/loadavg)"
-label4="$(color $statsLabelColor "Load") $(color $bulletColor "···")$(color $statsLabelColor "›") $(color $infoColor $label4)"
+label4="$(awk -v a="$(awk '/cpu /{print $2+$3+$4+$5+$6+$7+$8+$9+$10,$5}' /proc/stat; sleep 0.3)" '/cpu /{split(a,b," "); printf "%.1f%%", 100*(($2+$3+$4+$5+$6+$7+$8+$9+$10-b[1])-($5-b[2]))/($2+$3+$4+$5+$6+$7+$8+$9+$10-b[1])}' /proc/stat)"
+label4="$(color $statsLabelColor "Cpu") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor $label4)"
 
 label5="$(df -h ~ | awk 'NR==2 { printf "%sB / %sB \\e[38;5;144m» Free: %sB\\e[0m",$3,$2,$4; }')"
 label5="$(color $statsLabelColor "Disk") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor "$label5")"

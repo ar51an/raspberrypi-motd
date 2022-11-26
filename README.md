@@ -1,5 +1,5 @@
 ## MOTD
-Customized dynamic Message of the Day (MOTD) for Raspberry Pi
+Customized dynamic message of the day (motd) for Raspberry Pi
 <div align="center">
 
 ![motd](https://img.shields.io/badge/-motd-D8BFD8?logo=themodelsresource&logoColor=3a3a3d)
@@ -11,9 +11,9 @@ Customized dynamic Message of the Day (MOTD) for Raspberry Pi
 ### Preview
 <div align="center">
 
-![WithCount](https://user-images.githubusercontent.com/11185794/157579568-50dddaa2-c56d-4eb7-bc7c-a8a0a9cd0b3d.png)
+![WithCount](https://user-images.githubusercontent.com/11185794/204075510-ac39d1c1-59b6-4972-872c-8ee5edb256a8.png)
 
-![WithoutCount](https://user-images.githubusercontent.com/11185794/157579619-535aecd7-be3f-477a-9a7e-dccd70f0fb56.png)
+![WithoutCount](https://user-images.githubusercontent.com/11185794/204075513-10c08bab-8bac-429b-9a5a-9a1356c57af4.png)
 </div>
 
 ---
@@ -126,7 +126,7 @@ Make sure scripts are under the ownership of root and are executable.
 
 * Last step. We need to reset the pending update count in motd as soon as we update the OS, otherwise count will be updated at the next run of systemd timer. Suppose you update system with commands `sudo apt update` & `sudo apt full-upgrade`. **You need to run command `sudo run-parts /etc/update-motd-static.d` at the end.** It will reset the update count in motd after OS update. Whatever your preferred way to update the OS, run this command at the very end.
   * I update OS with a bash script `update.sh` after seeing pending updates in motd. It takes care of everything that includes **update OS, cleanup and update motd count**. `update.sh` is available in the latest release under `update-os` dir. Execution screenshot is shown in the repo under `update-os` dir. Script is well documented. **Open and check the commands once before execution.**  
-You can add switch -y to `sudo apt full-upgrade` command to bypass the yes/no prompt. I prefer not to have it as a last chance to review if I want to update or not. Script does cleanup as well using `sudo apt --purge autoremove` & `sudo apt clean`, you can remove them if you prefer not to run these after OS update.  
+You can add switch -y to `sudo apt full-upgrade` command to bypass the yes/no prompt. I prefer not to have it as a last chance to review. Script does cleanup as well using `sudo apt --purge autoremove` & `sudo apt clean`, you can remove them if you prefer not to run these after OS update.  
 
 #
 > **_NOTE:_**  

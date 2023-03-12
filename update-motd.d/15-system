@@ -71,6 +71,18 @@ label7="$(color $statsLabelColor "Memory") $(color $bulletColor "··")$(color $
 label8="$(hostname -I)"
 label8="$(color $statsLabelColor "IP") $(color $bulletColor "·····")$(color $statsLabelColor "›") $(color $infoColor $label8)"
 
+## Redis Stats
+# Get the total number of DNS queries
+dbsize=$(redis-cli info keyspace | grep 'db0:keys=' | cut -d= -f2 | cut -d, -f1)
+# Calculate the cache hit rate
+stats=$(redis-cli info stats)
+hits=$(echo "$stats" | awk -F: '/^keyspace_hits:/{print $2}' | tr -d '\r')
+misses=$(echo "$stats" | awk -F: '/^keyspace_misses:/{print $2}' | tr -d '\r')
+total=$((hits + misses))
+hit_rate=$(echo "scale=2; $hits / $total * 100" | bc)
+label9="$(color $infoColor "dbsize")$(color $statsLabelColor "=")$(color $dimInfoColor "$dbsize")$(color $infoColor " queries")$(color $statsLabelColor "=")$(color $dimInfoColor "$total")$(color $infoColor " hits")$(color $statsLabelColor "=")$(color $dimInfoColor "$hits")$(color $infoColor " misses")$(color $statsLabelColor "=")$(color $dimInfoColor "$misses")$(color $infoColor " hitrate")$(color $statsLabelColor "=")$(color $dimInfoColor "$hit_rate%")"
+label9="$(color $statsLabelColor "Redis") $(color $bulletColor "···")$(color $statsLabelColor "›") $label9"
+
 # Print
 echo
 # Two Entries Per Line
@@ -78,3 +90,4 @@ echo -e "                                                         $label2\r   $l
 echo -e "                                                         $label4\r   $label3"
 echo -e "                                                         $label6\r   $label5"
 echo -e "                                                         $label8\r   $label7"
+echo -e "                                                                \r   $label9"

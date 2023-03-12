@@ -26,18 +26,31 @@ function msgFormat (){
 }
 
 msgColor="38;5;103"
+statsLabelColor="38;5;143"
+bulletColor="38;5;241"
+infoColor="38;5;74"
+dimInfoColor="38;5;7;2"
 
 # Count
 apt-get update --quiet=2
 pkgCount="$(apt-get -s dist-upgrade | grep -Po '^\d+(?= upgraded)')"
 setCountColor "$pkgCount"
 
+# Check Unbound
+# Get the latest release tag from the Unbound GitHub repository
+msgUnboundUpdate=""
+latest_release=$(curl -s https://api.github.com/repos/NLnetLabs/unbound/tags | grep -oP '"name": "\K([^"]+)' | grep -v "alpha" | head -1 | sed 's/^release-//')
+current_version=$(unbound -V | awk '{print $2}' | sed 's/^Version://')
+if [[ $current_version < $latest_release ]]; then
+  msgUnboundUpdate="$(color $statsLabelColor "|") $(color $msgColor "Unbound available:") $(color $infoColor $current_version) $(color $statsLabelColor "»") $(color $infoColor $latest_release)"
+fi
+
 # Message
-msgHeader="$(color $msgColor ⮞)"
+msgHeader="$(color $msgColor ▶)"
 msgCount="$(color $countColor " $pkgCount ")"
 msgLabel="$(color $msgColor "$(msgFormat $pkgCount) can be upgraded")"
 
-updateMsg=" $msgHeader $msgCount $msgLabel"
+updateMsg=" $msgHeader $msgCount $msgLabel $msgUnboundUpdate"
 
 # Output To Static Script
 OUT="/etc/update-motd.d/"$(basename $0)

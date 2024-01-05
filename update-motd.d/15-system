@@ -37,7 +37,7 @@ me=$(logname)
 # Last Login
 read loginIP loginDate <<< $(last $me --time-format iso -2 | awk 'NR==1 { print $3,$4 }')
 if [[ $loginDate == *T* ]]; then
-  login="$(date -d $loginDate +"%a %b %d %Y, %I:%M %p") $(color $dimInfoColor "» $loginIP")"
+  login="$(date -d $loginDate +"%a %b %d %Y, %I:%M %p") $(color $dimInfoColor "* $loginIP")"
 else
   # First Login
   login="None"
@@ -45,31 +45,31 @@ fi
 
 # Stats
 label1="$login"
-label1="$(color $statsLabelColor "Last") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor "$label1")"
+label1="$(color $statsLabelColor "Last") $(color $bulletColor "....")$(color $statsLabelColor ".") $(color $infoColor "$label1")"
 
 label2="$(vcgencmd measure_temp | cut -c "6-9")°C"
-label2="$(color $statsLabelColor "Temp") $(color $bulletColor "···")$(color $statsLabelColor "›") $(color $infoColor $label2)"
+label2="$(color $statsLabelColor "Temp") $(color $bulletColor "...")$(color $statsLabelColor ".") $(color $infoColor $label2)"
 
 uptime="$(sec2time $(cut -d "." -f 1 /proc/uptime))"
-uptime="$uptime $(color $dimInfoColor "» $(date -d "@"$(grep btime /proc/stat | cut -d " " -f 2) +"%m-%d-%y %H:%M")")"
+uptime="$uptime $(color $dimInfoColor "* $(date -d "@"$(grep btime /proc/stat | cut -d " " -f 2) +"%m-%d-%y %H:%M")")"
 
 label3="$uptime"
-label3="$(color $statsLabelColor "Uptime") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor "$label3")"
+label3="$(color $statsLabelColor "Uptime") $(color $bulletColor "..")$(color $statsLabelColor ".") $(color $infoColor "$label3")"
 
 label4="$(awk -v a="$(awk '/cpu /{print $2+$3+$4+$5+$6+$7+$8+$9+$10,$5}' /proc/stat; sleep 0.3)" '/cpu /{split(a,b," "); printf "%.1f%%", 100*(($2+$3+$4+$5+$6+$7+$8+$9+$10-b[1])-($5-b[2]))/($2+$3+$4+$5+$6+$7+$8+$9+$10-b[1])}' /proc/stat)"
-label4="$(color $statsLabelColor "Cpu") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor $label4)"
+label4="$(color $statsLabelColor "Cpu") $(color $bulletColor "....")$(color $statsLabelColor ".") $(color $infoColor $label4)"
 
-label5="$(df -h ~ | awk 'NR==2 { printf "%sB / %sB \\e[38;5;144m» Free: %sB\\e[0m",$3,$2,$4; }')"
-label5="$(color $statsLabelColor "Disk") $(color $bulletColor "····")$(color $statsLabelColor "›") $(color $infoColor "$label5")"
+label5="$(df -h ~ | awk 'NR==2 { printf "%sB / %sB \\e[38;5;144m* Free: %sB\\e[0m",$3,$2,$4; }')"
+label5="$(color $statsLabelColor "Disk") $(color $bulletColor "....")$(color $statsLabelColor ".") $(color $infoColor "$label5")"
 
 label6="$(/bin/ls -d /proc/[0-9]* | wc -l)"
-label6="$(color $statsLabelColor "Procs") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor $label6)"
+label6="$(color $statsLabelColor "Procs") $(color $bulletColor "..")$(color $statsLabelColor ".") $(color $infoColor $label6)"
 
-label7="$(free -h --si | awk 'NR==2 { printf "%sB / %sB \\e[38;5;144m» Free: %sB\\e[0m",$3,$2,$4; }')"
-label7="$(color $statsLabelColor "Memory") $(color $bulletColor "··")$(color $statsLabelColor "›") $(color $infoColor "$label7")"
+label7="$(free -h --si | awk 'NR==2 { printf "%sB / %sB \\e[38;5;144m* Free: %sB\\e[0m",$3,$2,$4; }')"
+label7="$(color $statsLabelColor "Memory") $(color $bulletColor "..")$(color $statsLabelColor ".") $(color $infoColor "$label7")"
 
 label8="$(hostname -I)"
-label8="$(color $statsLabelColor "IP") $(color $bulletColor "·····")$(color $statsLabelColor "›") $(color $infoColor $label8)"
+label8="$(color $statsLabelColor "IP") $(color $bulletColor ".....")$(color $statsLabelColor ".") $(color $infoColor $label8)"
 
 # Print
 echo

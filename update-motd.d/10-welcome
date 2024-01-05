@@ -29,11 +29,11 @@ deviceLabel=" $(color $deviceColor " $deviceName ")"
 # Greetings
 me="$(color $userColor " $me ")"
 codename="$(grep 'VERSION_CODENAME' /etc/os-release | cut -d '=' -f 2)"
-greetings="$(color $greetingsColor " ⮞ Welcome »") $me $(color $greetingsColor To) $(color $codenameColor $codename)\n"
-greetings="$greetings$(color $greetingsColor " ⮞ $(date +"%a %b %d %Y, %I:%M:%S %p")")\n"
+greetings="$(color $greetingsColor " * Welcome") $me $(color $greetingsColor To) $(color $codenameColor $codename)\n"
+greetings="$greetings$(color $greetingsColor " * $(date +"%a %b %d %Y, %I:%M:%S %p")")\n"
 
 # OS
-greetings="$greetings$(color $greetingsColor " ⮞ $(uname -srm)")"
+greetings="$greetings$(color $greetingsColor " * $(uname -srm)")"
 
 # Print
 echo -e "\n$deviceLabel"

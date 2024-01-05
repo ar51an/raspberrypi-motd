@@ -33,7 +33,7 @@ pkgCount="$(apt-get -s dist-upgrade | grep -Po '^\d+(?= upgraded)')"
 setCountColor "$pkgCount"
 
 # Message
-msgHeader="$(color $msgColor ⮞)"
+msgHeader="$(color $msgColor \*)"
 msgCount="$(color $countColor " $pkgCount ")"
 msgLabel="$(color $msgColor "$(msgFormat $pkgCount) can be upgraded")"
 

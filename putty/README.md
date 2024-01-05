@@ -6,7 +6,7 @@
 #
 ### Font
 * Fira Code Fixed Medium - 8  
-![putty_font](https://user-images.githubusercontent.com/11185794/204076125-c5d28d71-f0ac-49de-9de9-7c549fd2aca3.png)
+![putty_font](https://github.com/ar51an/raspberrypi-motd/assets/11185794/9d96aa33-605a-4dde-bd97-a7fd7da9a05c)
 #
 ### Character Set
 * UTF-8 should be enabled.  

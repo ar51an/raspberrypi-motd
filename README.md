@@ -98,7 +98,7 @@ Make sure scripts are under the ownership of root and are executable.
 
 #### ❯ Automation
 
-* We need to automate the process of finding pending OS update count. There are 2 options **either** systemd timer (recommended) **or** cronjob. It is scheduled to run once a day at 8:00pm. You can change the time and frequency based on your preference.
+* We need to automate the process of finding pending OS update count. It is scheduled to run once a day at 8:00pm. You can change the time and frequency based on your preference.
 
   * **Systemd Timer**  
 	  Copy `motd-update.timer` and `motd-update.service` from the latest release under `systemd-timer` dir to `/etc/systemd/system`. Make sure files are under the ownership of root. Enable and start timer.  
@@ -111,17 +111,6 @@ Make sure scripts are under the ownership of root and are executable.
     > `sudo systemctl start motd-update.timer`  
     > **List all timers [If needed]:**  
     > `systemctl list-timers`  
-
-  * **Cronjob**  
-	  Add cronjob for root crontab. If this is the first time you are creating a cronjob, it will ask for preferred editor.  
-    > **Open crontab:**  
-    > `sudo crontab -e`  
-    > **Add cronjob:**  
-    > Add below lines at the end of the crontab. Save and close the editor.  
-    > ```
-    > # MOTD - Update '20-update' file - Once A Day At 8:00PM
-    > 0 20 * * * run-parts /etc/update-motd-static.d
-    > ```
 
 * Last step. We need to reset the pending update count in motd as soon as we update the OS, otherwise count will be updated at the next run of systemd timer. Suppose you update system with commands `sudo apt update` & `sudo apt full-upgrade`. **You need to run command `sudo run-parts /etc/update-motd-static.d` at the end.** It will reset the update count in motd after OS update. Whatever your preferred way to update the OS, run this command at the very end.
   * I update OS with a bash script `update.sh` after seeing pending updates in motd. It takes care of everything that includes **update OS, cleanup and update motd count**. `update.sh` is available in the latest release under `update-os` dir. Execution screenshot is shown in the repo under `update-os` dir. Script is well documented. **Open and check the commands once before execution.**  

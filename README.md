@@ -13,53 +13,50 @@ Customized dynamic message of the day (motd) for Raspberry Pi
 ### Preview
 <div align="center">
 
-![WithCount](https://user-images.githubusercontent.com/11185794/204075510-ac39d1c1-59b6-4972-872c-8ee5edb256a8.png)
+![WithCount](https://github.com/ar51an/raspberrypi-motd/assets/11185794/fbf346a2-6978-427b-b042-8fd5a5af3e8e)
 
-![WithoutCount](https://user-images.githubusercontent.com/11185794/204075513-10c08bab-8bac-429b-9a5a-9a1356c57af4.png)
+![WithoutCount](https://github.com/ar51an/raspberrypi-motd/assets/11185794/f5f6c3ca-915e-439e-9dbb-8c376c156633)
 </div>
 
 ---
 <div align="justify">
 
 ### Intro
-Many folks use Raspberry Pi as headless. If you use SSH more often to connect Raspberry Pi and interested in changing the MOTD (message of the day), keep on reading. There are many customized motds available on the web with and without ascii art. **The goal is to create simple, attractive, swift and useful motd**.
+Many folks use Raspberry Pi as headless. If you use SSH more often to connect Raspberry Pi and interested in changing the MOTD (message of the day), keep on reading. **The goal is to create simple, swift and useful motd**.
 <br/>
 
-Lack of available update count in RaspiOS motd is the triggering point to develop this motd. Few custom motds on the web for RaspiOS shows the available update count using `apt-check` utility which was part of update-notifier-common package. This package is no longer available from RaspiOS buster onwards, its functionality is merged into unattended-upgrades add-on package. Ubuntu uses the same utility to show package count on motd. I used `apt-get` to parse the required information.
+Lack of available update count in RaspiOS motd is the triggering point to develop this motd. Traditionally `apt-check` utility in `update-notifier-common` package was used to fetch the available update count. This package is no longer available from `buster` onwards, its functionality is merged into `unattended-upgrades` add-on package. I used `apt-get` to parse the required information.
 <br/>
 
-The process used for the motd is the same as RaspiOS or Ubuntu uses to show the motd dynamically. There is no additional package or third party tool used. It is written in bash and executes using the same mechanism as the default motd. There are multiple commands for retrieving the same information. I tested various commands for each info and used the ones that took least amount of time. This dynamic motd takes approximately 1 sec after authentication. This is the fastest you can get with all the information it is displaying.
+The process used for the motd is the same as RaspiOS or Ubuntu uses to show the motd dynamically. There is no additional package or third party tool used. It is written in bash and executes using the same mechanism as the default motd. There are multiple commands for retrieving the same information. I tested various commands for each info and used that took the least amount of time. This dynamic motd takes approximately 1 sec after authentication. This is the fastest you can get with all the information it is displaying.
 <br/>
 
 #### Specs:
 > |HW                      |OS                           |
 > |:-----------------------|:----------------------------|
-> |`Raspberry Pi 4 Model B`|`raspios-bullseye-arm64-lite`|
+> |`Raspberry Pi 4 Model B`|`raspios-bookworm-arm64-lite`|
 #
 ### Steps
-#### ⮞ Remove Default MOTD
+#### ❯ Remove Default MOTD
 
 * Delete `/etc/motd`. This file contains the static text about Debian GNU/Linux liability. Alternatively you can keep a backup of this file at some place.
-  > **Delete motd file:**  
   > `sudo rm /etc/motd`  
 
 * Delete `/etc/update-motd.d/10-uname`. This file prints the OS version dynamically to the default message. New motd will print a trimmed down version of OS.  
-  > **Delete 10-uname file:**  
   > `sudo rm /etc/update-motd.d/10-uname`  
 
 * Modify `/etc/ssh/sshd_config`. This file prints last login timestamp and location. New motd will print last login timestamp and location.  
-  > **Edit sshd_config file:**  
   > `sudo nano /etc/ssh/sshd_config`  
-  > Add line `PrintLastLog no`. Default is yes.  
-  > Save `Ctrl+O` and Exit `Ctrl+X`  
-  > Restart sshd process `sudo systemctl restart sshd`  
+  > Add: `PrintLastLog no`  
+  > Save & Exit  
+  > Restart sshd: `sudo systemctl restart sshd`  
 
 #
 > **_NOTE:_**  
 > Default motd is completely removed. Reconnect ssh session and if you followed the steps correctly you will not see any motd.  
 #
 
-#### ⮞ Implement New MOTD
+#### ❯ Implement New MOTD
 * Copy `10-welcome`, `15-system` and `20-update` scripts from the latest release under `update-motd.d` dir to `/etc/update-motd.d` dir. 
 Make sure scripts are under the ownership of root and are executable.
   > **Change ownership [If needed]:**  
@@ -99,7 +96,7 @@ Make sure scripts are under the ownership of root and are executable.
 > > `sudo run-parts /etc/update-motd.d`
 #
 
-#### ⮞ Automation
+#### ❯ Automation
 
 * We need to automate the process of finding pending OS update count. There are 2 options **either** systemd timer (recommended) **or** cronjob. It is scheduled to run once a day at 8:00pm. You can change the time and frequency based on your preference.
 
@@ -136,16 +133,16 @@ You can add switch -y to `sudo apt full-upgrade` command to bypass the yes/no pr
 #
 
 ### Scripts Info
-#### ⮞ /etc/update-motd.d/10-welcome
+#### ❯ /etc/update-motd.d/10-welcome
 > Displays the raspberry model, welcome user message, current timestamp and kernel version.
 
-#### ⮞ /etc/update-motd.d/15-system
+#### ❯ /etc/update-motd.d/15-system
 > Shows various details of the system. It includes temperature, memory, running processes and others. Few labels are trimmed down, like `Procs` for `Processes`, `Temp` for `Temperature`, `Last` for `Last Login`. You can use full labels according to your preference and arrange them accordingly.
 
-#### ⮞ /etc/update-motd.d/20-update
+#### ❯ /etc/update-motd.d/20-update
 > This static script displays available update count. It is generated by `/etc/update-motd-static.d/20-update`.
 
-#### ⮞ /etc/update-motd-static.d/20-update
+#### ❯ /etc/update-motd-static.d/20-update
 > Calculates available update count and generates the static script for motd display. It can be expanded to show the security update count separately like Ubuntu.
 
 #

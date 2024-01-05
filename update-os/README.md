@@ -1,3 +1,2 @@
 ## OS Update Script Preview
-![UpdateScript](https://user-images.githubusercontent.com/11185794/132078145-c45cef75-6a3f-49f6-bee6-2415674f8820.png)
-
+![UpdateScript](https://github.com/ar51an/raspberrypi-motd/assets/11185794/a8e44e0f-a4ab-4206-8626-93be42774d10)
